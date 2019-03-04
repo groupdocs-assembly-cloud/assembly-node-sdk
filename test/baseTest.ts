@@ -1,7 +1,7 @@
 /*
 * MIT License
 
-* Copyright (c) 2018 Aspose Pty Ltd
+* Copyright (c) 2018 GroupDocs Pty Ltd
 
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@ import { AssemblyApiAvailiableVersions } from "../src/internal/assemblyApiAvaili
 let storageApi;
 
 /**
- * Initialize WordsApi
+ * Initialize AssemblyApi
  */
 export function initializeAssemblyApi(debugMode?: boolean, version?: AssemblyApiAvailiableVersions) {
     const config = require("../testConfig.json");
@@ -44,7 +44,7 @@ export function initializeStorageApi() {
         const config = require("../testConfig.json");
         const StorageApi = require("asposestoragecloud");
 
-        storageApi = new StorageApi({ appSid: config.AppSid, apiKey: config.AppKey, baseURI: config.BaseUrl + "/v1.1", debug: true });
+        storageApi = new StorageApi({ appSid: config.AppSid, apiKey: config.AppKey, baseURI: config.BaseUrl + "/v1.1"});
     }
 
     return storageApi;

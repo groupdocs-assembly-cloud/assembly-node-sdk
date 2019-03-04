@@ -1,45 +1,32 @@
-import { expect } from 'chai';
-import { readFileSync } from 'fs';
-import 'mocha';
-import { Request } from '../src/model/model'
-import { remoteBaseTestDataFolder, initializeStorageApi, initializeAssemblyApi, localBaseTestDataFolder } from "./baseTest";
-import { MatchStats, TeamStats, QuarterStats } from "./dto/index";
+/*
+* MIT License
 
+* Copyright (c) 2018 GroupDocs Pty Ltd
 
-function getMatchStats(
-    team1Name: string,
-    team2Name: string,
-    team1QuarterStats: TeamStats[],
-    team2QuarterStats: TeamStats[]): MatchStats {
-    let quarterStats: QuarterStats[] = [];
-    for (let i = 0; i < 4; i++) {
-        quarterStats.push(new QuarterStats(i + 1, team1QuarterStats[i], team2QuarterStats[i]));
-    }
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
 
-    return new MatchStats(team1Name, team2Name, quarterStats);
-}
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
 
-function getSingleMatchStats(): MatchStats {
-    let team1 = [
-        new TeamStats(27, 36.7, 45.3),
-        new TeamStats(21, 33, 40.5),
-        new TeamStats(33, 39.1, 42),
-        new TeamStats(29, 35.1, 43.5)
-    ],
-        team2 = [
-            new TeamStats(23, 35.5, 44),
-            new TeamStats(26, 34, 41.7),
-            new TeamStats(25, 25.9, 35.9),
-            new TeamStats(33, 36.5, 51),
-        ];
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*/
+import { Request } from "../src/model/model";
+import { initializeAssemblyApi, initializeStorageApi, localBaseTestDataFolder, remoteBaseTestDataFolder } from "./baseTest";
 
-    return getMatchStats(
-        "Cleveland Cavaliers",
-        "Golden State Warriors",
-        team1,
-        team2
-    );
-}
+import { expect } from "chai";
+import { readFileSync } from "fs";
+import "mocha";
 
 describe("postAssemble function", () => {
     it("should return non empty document stream", () => {
@@ -48,29 +35,25 @@ describe("postAssemble function", () => {
 
         const fileName = "TestAllChartTypes.docx";
         const dataName = "Teams.json";
-        let str = JSON.stringify({ SaveFormat: "pdf" });
-        str += JSON.stringify(getSingleMatchStats());
         return new Promise((resolve) => {
             storageApi.PutCreate(remoteBaseTestDataFolder + "GroupDocs.Assembly" + "/" + fileName,
                 null, null,
                 localBaseTestDataFolder + "/" + fileName, (responseMessage) => {
                     expect(responseMessage.status).to.equal("OK");
                     resolve();
-                })
+                });
         }).then(() => {
             const request = new Request({
                 name: fileName,
                 folder: remoteBaseTestDataFolder + "GroupDocs.Assembly",
                 data: readFileSync(localBaseTestDataFolder + dataName),
-                saveOptions: {saveFormat: 'docx'}
+                saveOptions: {saveFormat: "docx"},
             });
 
             return assemblyApi.postAssembleDocument(request).then((result) => {
                 expect(result.response.statusCode).to.equal(200);
                 expect(result.body.byteLength).to.greaterThan(0);
-            })
-        })
-    })
+            });
+        });
+    });
 });
-
-

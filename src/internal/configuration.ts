@@ -1,7 +1,7 @@
 /*
 * MIT License
 
-* Copyright (c) 2018 Aspose Pty Ltd
+* Copyright (c) 2018 GroupDocs Pty Ltd
 
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -24,10 +24,10 @@
 
 import { IAuthentication, OAuth  } from "../internal/auth";
 import { AssemblyApiAvailiableVersions } from "./assemblyApiAvailiableVersions";
-const defaultBasePath = "https://api.aspose.cloud";
+const defaultBasePath = "https://api.groupdocs.cloud";
 
 /**
- * Words API configuration
+ * Assembly API configuration
  */
 export class Configuration {
     /**

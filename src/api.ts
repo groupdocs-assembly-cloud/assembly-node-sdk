@@ -1,7 +1,7 @@
 /*
 * MIT License
 
-* Copyright (c) 2018 Aspose Pty Ltd
+* Copyright (c) 2018 GroupDocs Pty Ltd
 
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +35,7 @@ export * from "./model/model";
 export * from "./internal/assemblyApiAvailiableVersions";
 
 /**
- * Library for communicating with the Aspose.Assembly Cloud API
+ * Library for communicating with the GroupDocs.Assembly Cloud API
  */
 export class AssemblyApi {
     /**
@@ -53,11 +53,12 @@ export class AssemblyApi {
     constructor(appSID: string, appKey: string, baseUrl?: string, debugMode?: boolean, version?: AssemblyApiAvailiableVersions) {
         this.configuration = new Configuration(appSID, appKey, baseUrl, debugMode, version);
     }
-    
+
     /**
      * Builds a document using document template and XML or JSON data passed in request
      * @param requestObj contains request parameters
      */
+    // tslint:disable-next-line:completed-docs
     public async postAssembleDocument(requestObj: model.Request): Promise<{response: http.IncomingMessage, body: Buffer}> {
         if (requestObj === null || requestObj === undefined) {
             throw new Error('Required parameter "requestObj" was null or undefined when calling postAssembleDocument.');
