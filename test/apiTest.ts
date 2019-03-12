@@ -21,7 +21,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-import { Request } from "../src/model/model";
+import { PostAssembleDocumentRequest } from "../src/model/model";
 import { initializeAssemblyApi, initializeStorageApi, localBaseTestDataFolder, remoteBaseTestDataFolder } from "./baseTest";
 
 import { expect } from "chai";
@@ -43,7 +43,7 @@ describe("postAssemble function", () => {
                     resolve();
                 });
         }).then(() => {
-            const request = new Request({
+            const request = new PostAssembleDocumentRequest({
                 name: fileName,
                 folder: remoteBaseTestDataFolder + "GroupDocs.Assembly",
                 data: readFileSync(localBaseTestDataFolder + dataName),

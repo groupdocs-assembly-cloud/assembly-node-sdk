@@ -1,7 +1,7 @@
 /*
 * MIT License
 
-* Copyright (c) 2018 GroupDocs Pty Ltd
+* Copyright (c) 2019 GroupDocs Pty Ltd
 
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -59,7 +59,7 @@ export class AssemblyApi {
      * @param requestObj contains request parameters
      */
     // tslint:disable-next-line:completed-docs
-    public async postAssembleDocument(requestObj: model.Request): Promise<{response: http.IncomingMessage, body: Buffer}> {
+    public async postAssembleDocument(requestObj: model.PostAssembleDocumentRequest): Promise<{response: http.IncomingMessage, body: Buffer}> {
         if (requestObj === null || requestObj === undefined) {
             throw new Error('Required parameter "requestObj" was null or undefined when calling postAssembleDocument.');
         }

@@ -1,7 +1,7 @@
 /*
 * MIT License
 
-* Copyright (c) 2018 GroupDocs Pty Ltd
+* Copyright (c) 2019 GroupDocs Pty Ltd
 
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -90,9 +90,9 @@ const typeMap = {
 export {enumsMap, typeMap};
 
 /**
- * Request model for  operation.
+ * Request model for PostAssembleDocument operation.
  */
-export class Request {
+export class PostAssembleDocumentRequest {
     /**
      * File name of template, which is located on a storage
      */
@@ -118,7 +118,7 @@ export class Request {
      */
     public destFileName: string;
     
-    public constructor(init?: Partial<Request>) {        
+    public constructor(init?: Partial<PostAssembleDocumentRequest>) {        
         Object.assign(this, init);
     } 
 }
