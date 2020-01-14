@@ -55,22 +55,23 @@ export class Configuration {
      */
     public debugMode: boolean;
 
-    constructor(appSID: string, appKey: string, baseUrl?: string, debugMode?: boolean) {
+    /**
+     * Gets or sets the API version.
+     */
+    public version: AssemblyApiAvailiableVersions = AssemblyApiAvailiableVersions.v1;
+
+    constructor(appSID: string, appKey: string, baseUrl?: string, debugMode?: boolean, version?: AssemblyApiAvailiableVersions) {
         if (baseUrl) {
             this.baseUrl = baseUrl;
-        }
-
-        if (!appKey || !appKey.trim()) {
-            throw new Error("appKey parameter must be non-empty string");
-        }
-
-        if (!appSID || !appSID.trim()) {
-            throw new Error("appSID parameter must be non-empty string");
         }
 
         this.appSID = appSID;
         this.appKey = appKey;
         this.debugMode = debugMode;
+
+        if (version) {
+            this.version = version;
+        }
 
         this.authentication = new OAuth() as IAuthentication;
     }
@@ -79,6 +80,6 @@ export class Configuration {
      * Returns api base url
      */
     public getApiBaseUrl(): string {
-        return this.baseUrl + "/v4.0";
+        return this.baseUrl + "/" + this.version;
     }
 }
