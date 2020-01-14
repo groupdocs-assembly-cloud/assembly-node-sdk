@@ -25,7 +25,7 @@ import { PostAssembleDocumentRequest } from "../src/model/model";
 import { initializeAssemblyApi, initializeStorageApi, localBaseTestDataFolder, remoteBaseTestDataFolder } from "./baseTest";
 
 import { expect } from "chai";
-import { readFileSync } from "fs";
+import { createReadStream } from "fs";
 import "mocha";
 
 describe("postAssemble function", () => {
@@ -46,7 +46,7 @@ describe("postAssemble function", () => {
             const request = new PostAssembleDocumentRequest({
                 name: fileName,
                 folder: remoteBaseTestDataFolder + "GroupDocs.Assembly",
-                data: readFileSync(localBaseTestDataFolder + dataName),
+                data: createReadStream(localBaseTestDataFolder + dataName),
                 saveOptions: {saveFormat: "docx"},
             });
 
