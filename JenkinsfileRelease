@@ -43,7 +43,6 @@ node('words-linux') {
 						sh "npm install ${packageName}"
 						
 						sh "find test -type f -name \"*.ts\" -exec sed -i 's+\".*/src/.*\"+\"groupdocsassemblycloud\"+g' {} +"
-						sh "find bdd -type f -name \"*.ts\" -exec sed -i 's+\".*/src/.*\"+\"groupdocsassemblycloud\"+g' {} +"
 					}
 				}
 				

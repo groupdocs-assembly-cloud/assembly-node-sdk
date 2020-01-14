@@ -44,12 +44,3 @@ gulp.task('copyTestConfig', function () {
             .src('testConfig.json')
             .pipe(gulp.dest(buildConfig.targetPath));
 });
-
-gulp.task('cucumber', gulp.series("build", "copyTestConfig", function () {
-        
-    return gulp.src('./bdd/features/**/*.feature').pipe(cucumber({
-        'steps': './dist/bdd/steps/**/*.js',
-        'support': './dist/bdd/support/**/*.js',
-        'format': 'json:./reports/bdd_results.json',        
-    }));
-}));

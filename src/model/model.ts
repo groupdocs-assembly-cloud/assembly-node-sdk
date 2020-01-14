@@ -21,6 +21,43 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
+import { IncomingMessage } from "http";
+import { Readable } from "stream";
+
+/**
+ * Generic class for GroupDocs.Assembly Cloud API response
+ */
+export class GroupDocsIncomingMessage<T> {
+    /**
+     * Gets or sets raw response
+     */
+    public response: IncomingMessage;
+    
+    /**
+     * Get or set parsed response
+     */
+    public body: T;
+}
+
+/**
+ * Attribute description
+ */
+export class AttributeInfo {
+    /**
+     * Gets or sets attribute name
+     */
+    public name: string;
+    
+    /**
+     * Gets or sets attribute base name
+     */
+    public baseName: string;
+    
+    /**
+     * Gets or sets attribute type name
+     */
+    public type: string;
+}
 
 /**
  * The empty type used as a flag.             
@@ -30,7 +67,7 @@ export class FileResponse {
     /**
      * Attribute type map
      */
-    public static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    public static attributeTypeMap: Array<AttributeInfo> = [
     ];
 
     /**
@@ -54,7 +91,7 @@ export class LoadSaveOptionsData {
     /**
      * Attribute type map
      */
-    public static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
+    public static attributeTypeMap: Array<AttributeInfo> = [
         {
             name: "saveFormat",
             baseName: "SaveFormat",
@@ -101,7 +138,7 @@ export class PostAssembleDocumentRequest {
     /**
      * Report data in JSON or XML format
      */
-    public data: Buffer;
+    public data: Readable;
 
     /**
      * Save options in json format
