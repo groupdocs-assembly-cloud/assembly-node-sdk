@@ -47,16 +47,6 @@ def runtests(dockerImageVersion)
 						}
 					}
 				}
-				
-				gitlabCommitStatus("bdd-tests") {
-					stage('bdd-tests'){
-						try {
-							sh "npm run gulp cucumber"
-						} finally {
-							cucumber 'reports/**.json'
-						}
-					}
-				}
             }        
         } finally {                       
             deleteDir()
