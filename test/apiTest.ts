@@ -47,7 +47,7 @@ describe("postAssemble function", () => {
                 name: fileName,
                 folder: remoteBaseTestDataFolder + "GroupDocs.Assembly",
                 data: createReadStream(localBaseTestDataFolder + dataName),
-                saveOptions: {saveFormat: "docx"},
+                saveOptions: {saveFormat: "pdf"},
             });
 
             return assemblyApi.postAssembleDocument(request).then((result) => {
