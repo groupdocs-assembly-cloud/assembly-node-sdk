@@ -96,6 +96,11 @@ export class AssemblyApi {
         
         localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "folder", requestObj.folder);
         localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "destFileName", requestObj.destFileName);
+
+        if (requestObj.saveOptions !== undefined) {
+            formParams.SaveOptions = JSON.stringify(requestObj.saveOptions);
+        }
+
         if (requestObj.data !== undefined) {
             formParams.Data = requestObj.data;
         }
@@ -105,10 +110,8 @@ export class AssemblyApi {
             qs: queryParameters,
             uri: localVarPath,
             encoding: null,
-            body: ObjectSerializer.serialize(requestObj.saveOptions, requestObj.saveOptions.constructor.name === "Object" ? "LoadSaveOptionsData" : requestObj.saveOptions.constructor.name),
+            formData: formParams,
         };
-
-        requestOptions.formData = formParams;        
         const response = await invokeApiMethod(requestOptions, this.configuration);
         const body =  ObjectSerializer.deserialize(response.body, "Buffer");
         const result: model.GroupDocsIncomingMessage<Buffer> = {body, response};
