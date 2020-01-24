@@ -281,7 +281,7 @@ export class FormatCollection {
 /**
  * Save options data which is using for specifying additional save options, like save format and etc.
  */
-export class LoadSaveOptionsData {
+export class ReportOptionsData {
 
     /**
      * Attribute type map
@@ -291,13 +291,18 @@ export class LoadSaveOptionsData {
             name: "saveFormat",
             baseName: "SaveFormat",
             type: "string",
+        },        
+        {
+            name: "reportData",
+            baseName: "ReportData",
+            type: "string",
         }    ];
 
     /**
      * Returns attribute type map
      */
     public static getAttributeTypeMap() {
-        return LoadSaveOptionsData.attributeTypeMap;
+        return ReportOptionsData.attributeTypeMap;
     }
 
     /**
@@ -305,7 +310,12 @@ export class LoadSaveOptionsData {
      */
     public saveFormat: string;
     
-    public constructor(init?: Partial<LoadSaveOptionsData>) {
+    /**
+     * Data for report
+     */
+    public reportData: string;
+    
+    public constructor(init?: Partial<ReportOptionsData>) {
         
         Object.assign(this, init);
     }        
@@ -457,7 +467,7 @@ const typeMap = {
             FilesUploadResult,
             Format,
             FormatCollection,
-            LoadSaveOptionsData,
+            ReportOptionsData,
             StorageApiError,
             StorageFile,
 };
@@ -465,9 +475,9 @@ const typeMap = {
 export {enumsMap, typeMap};
 
 /**
- * Request model for FileCopyFile operation.
+ * Request model for CopyFile operation.
  */
-export class FileCopyFileRequest {
+export class CopyFileRequest {
     /**
      * Destination file path
      */
@@ -493,15 +503,63 @@ export class FileCopyFileRequest {
      */
     public versionId: string;
     
-    public constructor(init?: Partial<FileCopyFileRequest>) {        
+    public constructor(init?: Partial<CopyFileRequest>) {        
         Object.assign(this, init);
     } 
 }
 
 /**
- * Request model for FileDeleteFile operation.
+ * Request model for CopyFolder operation.
  */
-export class FileDeleteFileRequest {
+export class CopyFolderRequest {
+    /**
+     * Destination folder path e.g. '/dst'
+     */
+    public destPath: string;
+
+    /**
+     * Source folder path e.g. /Folder1
+     */
+    public srcPath: string;
+
+    /**
+     * Source storage name
+     */
+    public srcStorageName: string;
+
+    /**
+     * Destination storage name
+     */
+    public destStorageName: string;
+    
+    public constructor(init?: Partial<CopyFolderRequest>) {        
+        Object.assign(this, init);
+    } 
+}
+
+/**
+ * Request model for CreateFolder operation.
+ */
+export class CreateFolderRequest {
+    /**
+     * Target folder's path e.g. Folder1/Folder2/. The folders will be created recursively
+     */
+    public path: string;
+
+    /**
+     * Storage name
+     */
+    public storageName: string;
+    
+    public constructor(init?: Partial<CreateFolderRequest>) {        
+        Object.assign(this, init);
+    } 
+}
+
+/**
+ * Request model for DeleteFile operation.
+ */
+export class DeleteFileRequest {
     /**
      * Path of the file including file name and extension e.g. /Folder1/file.ext
      */
@@ -517,15 +575,39 @@ export class FileDeleteFileRequest {
      */
     public versionId: string;
     
-    public constructor(init?: Partial<FileDeleteFileRequest>) {        
+    public constructor(init?: Partial<DeleteFileRequest>) {        
         Object.assign(this, init);
     } 
 }
 
 /**
- * Request model for FileDownloadFile operation.
+ * Request model for DeleteFolder operation.
  */
-export class FileDownloadFileRequest {
+export class DeleteFolderRequest {
+    /**
+     * Folder path e.g. /Folder1s
+     */
+    public path: string;
+
+    /**
+     * Storage name
+     */
+    public storageName: string;
+
+    /**
+     * Enable to delete folders, subfolders and files
+     */
+    public recursive: boolean;
+    
+    public constructor(init?: Partial<DeleteFolderRequest>) {        
+        Object.assign(this, init);
+    } 
+}
+
+/**
+ * Request model for DownloadFile operation.
+ */
+export class DownloadFileRequest {
     /**
      * Path of the file including the file name and extension e.g. /folder1/file.ext
      */
@@ -541,15 +623,44 @@ export class FileDownloadFileRequest {
      */
     public versionId: string;
     
-    public constructor(init?: Partial<FileDownloadFileRequest>) {        
+    public constructor(init?: Partial<DownloadFileRequest>) {        
         Object.assign(this, init);
     } 
 }
 
 /**
- * Request model for FileMoveFile operation.
+ * Request model for GetFilesList operation.
  */
-export class FileMoveFileRequest {
+export class GetFilesListRequest {
+    /**
+     * Folder path e.g. /Folder1
+     */
+    public path: string;
+
+    /**
+     * Storage name
+     */
+    public storageName: string;
+    
+    public constructor(init?: Partial<GetFilesListRequest>) {        
+        Object.assign(this, init);
+    } 
+}
+
+/**
+ * Request model for GetSupportedFileFormats operation.
+ */
+export class GetSupportedFileFormatsRequest {
+    
+    public constructor(init?: Partial<GetSupportedFileFormatsRequest>) {        
+        Object.assign(this, init);
+    } 
+}
+
+/**
+ * Request model for MoveFile operation.
+ */
+export class MoveFileRequest {
     /**
      * Destination file path e.g. '/dest.ext'
      */
@@ -575,130 +686,15 @@ export class FileMoveFileRequest {
      */
     public versionId: string;
     
-    public constructor(init?: Partial<FileMoveFileRequest>) {        
+    public constructor(init?: Partial<MoveFileRequest>) {        
         Object.assign(this, init);
     } 
 }
 
 /**
- * Request model for FileUploadFile operation.
+ * Request model for MoveFolder operation.
  */
-export class FileUploadFileRequest {
-    /**
-     * File to upload
-     */
-    public fileData: Readable;
-
-    /**
-     * Path where to upload including filename and extension e.g. /file.ext or /Folder 1/file.ext              If the content is multipart and path does not contains the file name it tries to get them from filename parameter              from Content-Disposition header.
-     */
-    public path: string;
-
-    /**
-     * Storage name
-     */
-    public storageName: string;
-    
-    public constructor(init?: Partial<FileUploadFileRequest>) {        
-        Object.assign(this, init);
-    } 
-}
-
-/**
- * Request model for FolderCopyFolder operation.
- */
-export class FolderCopyFolderRequest {
-    /**
-     * Destination folder path e.g. '/dst'
-     */
-    public destPath: string;
-
-    /**
-     * Source folder path e.g. /Folder1
-     */
-    public srcPath: string;
-
-    /**
-     * Source storage name
-     */
-    public srcStorageName: string;
-
-    /**
-     * Destination storage name
-     */
-    public destStorageName: string;
-    
-    public constructor(init?: Partial<FolderCopyFolderRequest>) {        
-        Object.assign(this, init);
-    } 
-}
-
-/**
- * Request model for FolderCreateFolder operation.
- */
-export class FolderCreateFolderRequest {
-    /**
-     * Target folder's path e.g. Folder1/Folder2/. The folders will be created recursively
-     */
-    public path: string;
-
-    /**
-     * Storage name
-     */
-    public storageName: string;
-    
-    public constructor(init?: Partial<FolderCreateFolderRequest>) {        
-        Object.assign(this, init);
-    } 
-}
-
-/**
- * Request model for FolderDeleteFolder operation.
- */
-export class FolderDeleteFolderRequest {
-    /**
-     * Folder path e.g. /Folder1s
-     */
-    public path: string;
-
-    /**
-     * Storage name
-     */
-    public storageName: string;
-
-    /**
-     * Enable to delete folders, subfolders and files
-     */
-    public recursive: boolean;
-    
-    public constructor(init?: Partial<FolderDeleteFolderRequest>) {        
-        Object.assign(this, init);
-    } 
-}
-
-/**
- * Request model for FolderGetFilesList operation.
- */
-export class FolderGetFilesListRequest {
-    /**
-     * Folder path e.g. /Folder1
-     */
-    public path: string;
-
-    /**
-     * Storage name
-     */
-    public storageName: string;
-    
-    public constructor(init?: Partial<FolderGetFilesListRequest>) {        
-        Object.assign(this, init);
-    } 
-}
-
-/**
- * Request model for FolderMoveFolder operation.
- */
-export class FolderMoveFolderRequest {
+export class MoveFolderRequest {
     /**
      * Destination folder path to move to e.g '/dst'
      */
@@ -719,17 +715,7 @@ export class FolderMoveFolderRequest {
      */
     public destStorageName: string;
     
-    public constructor(init?: Partial<FolderMoveFolderRequest>) {        
-        Object.assign(this, init);
-    } 
-}
-
-/**
- * Request model for GetSupportedFileFormats operation.
- */
-export class GetSupportedFileFormatsRequest {
-    
-    public constructor(init?: Partial<GetSupportedFileFormatsRequest>) {        
+    public constructor(init?: Partial<MoveFolderRequest>) {        
         Object.assign(this, init);
     } 
 }
@@ -744,14 +730,9 @@ export class PostAssembleDocumentRequest {
     public name: string;
 
     /**
-     * Report data in JSON or XML format
+     * Report Data Options. It should be JSON with SaveFormat and ReportData
      */
-    public data: Readable;
-
-    /**
-     * Save options in json format
-     */
-    public saveOptions: LoadSaveOptionsData;
+    public reportData: ReportOptionsData;
 
     /**
      * Folder path where template file is located(on a storage)
@@ -764,6 +745,30 @@ export class PostAssembleDocumentRequest {
     public destFileName: string;
     
     public constructor(init?: Partial<PostAssembleDocumentRequest>) {        
+        Object.assign(this, init);
+    } 
+}
+
+/**
+ * Request model for UploadFile operation.
+ */
+export class UploadFileRequest {
+    /**
+     * File to upload
+     */
+    public file: Readable;
+
+    /**
+     * Path where to upload including filename and extension e.g. /file.ext or /Folder 1/file.ext              If the content is multipart and path does not contains the file name it tries to get them from filename parameter              from Content-Disposition header.
+     */
+    public path: string;
+
+    /**
+     * Storage name
+     */
+    public storageName: string;
+    
+    public constructor(init?: Partial<UploadFileRequest>) {        
         Object.assign(this, init);
     } 
 }
