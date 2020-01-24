@@ -504,6 +504,7 @@ export class AssemblyApi {
         
         localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "folder", requestObj.folder);
         localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "destFileName", requestObj.destFileName);
+
         if (requestObj.saveOptions !== undefined) {
             formParams.SaveOptions = JSON.stringify(requestObj.saveOptions);
         }
