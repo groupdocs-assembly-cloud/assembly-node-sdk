@@ -21,33 +21,38 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-import { PostAssembleDocumentRequest } from "../src/model/model";
-import { initializeAssemblyApi, initializeStorageApi, localBaseTestDataFolder, remoteBaseTestDataFolder } from "./baseTest";
+import { PostAssembleDocumentRequest, ReportOptionsData, UploadFileRequest } from "../src/model/model";
+import { initializeAssemblyApi, localBaseTestDataFolder, remoteBaseTestDataFolder } from "./baseTest";
 
 import { expect } from "chai";
-import { createReadStream } from "fs";
+import { createReadStream, readFileSync } from "fs";
 import "mocha";
 
 describe("postAssemble function", () => {
     it("should return non empty document stream", () => {
-        const storageApi = initializeStorageApi();
         const assemblyApi = initializeAssemblyApi();
 
         const fileName = "TestAllChartTypes.docx";
         const dataName = "Teams.json";
         return new Promise((resolve) => {
-            storageApi.PutCreate(remoteBaseTestDataFolder + "GroupDocs.Assembly" + "/" + fileName,
-                null, null,
-                localBaseTestDataFolder + "/" + fileName, (responseMessage) => {
-                    expect(responseMessage.status).to.equal("OK");
-                    resolve();
-                });
+            const request = new UploadFileRequest({
+                file: createReadStream(localBaseTestDataFolder + "/" + fileName),
+                path: remoteBaseTestDataFolder + "GroupDocs.Assembly" + "/" + fileName,
+            });
+            
+            assemblyApi.uploadFile(request).then((result) => {
+                expect(result.response.statusCode).to.equal(200);
+                resolve();
+            });
         }).then(() => {
+            const reportOptionsData = new ReportOptionsData({ 
+                saveFormat: "pdf", 
+                reportData: readFileSync(localBaseTestDataFolder + dataName, "utf8"),
+            });
             const request = new PostAssembleDocumentRequest({
                 name: fileName,
                 folder: remoteBaseTestDataFolder + "GroupDocs.Assembly",
-                data: createReadStream(localBaseTestDataFolder + dataName),
-                saveOptions: {saveFormat: "pdf"},
+                reportData: reportOptionsData,
             });
 
             return assemblyApi.postAssembleDocument(request).then((result) => {

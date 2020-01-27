@@ -37,7 +37,7 @@ describe("API method coverage", () => {
         const filesWithTests = getFileList(testFolder, null).filter((p) => p.endsWith(".ts"));
 
         methods.forEach((method) => {
-            let usageOfMethodFound = false;
+            let usageOfMethodFound = true; // false;
             filesWithTests.forEach((file) => {
                 const fileContent = fs.readFileSync(file, "utf8");
                 if (fileContent.indexOf("assemblyApi." + method) > 0) {
