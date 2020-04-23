@@ -53,7 +53,7 @@ describe("postAssemble function", () => {
                 }),
             });
             const request = new AssembleDocumentRequest({
-                assembleOptions: assembleOptions,
+                assembleOptions: { assembleOptions },
             });
 
             return assemblyApi.assembleDocument(request).then((result) => {
