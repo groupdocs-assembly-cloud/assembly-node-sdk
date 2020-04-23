@@ -111,7 +111,7 @@ async function invokeApiMethodInternal(requestOptions: request.Options, confgura
                             bodyContent = JSON.parse(bodyContent.toString("utf8"));
                         }
 
-                        const data = ObjectSerializer.deserialize(bodyContent, "WordsApiErrorResponse");
+                        const data = ObjectSerializer.deserialize(bodyContent, "GroupdocsApiErrorResponse");
                         reject({ response, body: data });
                     } catch (error) {
                         reject({ message: "Error while parse server error: " + error });

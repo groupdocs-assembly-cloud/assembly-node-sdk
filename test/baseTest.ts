@@ -25,8 +25,6 @@
 import { AssemblyApi } from "../src/api";
 import { AssemblyApiAvailiableVersions } from "../src/internal/assemblyApiAvailiableVersions";
 
-let storageApi;
-
 /**
  * Initialize AssemblyApi
  */
@@ -34,20 +32,6 @@ export function initializeAssemblyApi(debugMode?: boolean, version?: AssemblyApi
     const config = require("../testConfig.json");
     const assemblyApi = new AssemblyApi(config.AppSid, config.AppKey, config.BaseUrl, debugMode, version);
     return assemblyApi;
-}
-
-/**
- * Initialize StorageApi
- */
-export function initializeStorageApi() {
-    if (!storageApi) {
-        const config = require("../testConfig.json");
-        const StorageApi = require("asposestoragecloud");
-
-        storageApi = new StorageApi({ appSid: config.AppSid, apiKey: config.AppKey, baseURI: config.BaseUrl + "/v1.1"});
-    }
-
-    return storageApi;
 }
 
 export const remoteBaseFolder = "Temp/SdkTests/node/";

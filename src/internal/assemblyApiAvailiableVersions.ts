@@ -29,7 +29,7 @@ export enum AssemblyApiAvailiableVersions {
     /** 
      * Current API version
      */
-    v1 = "v1" as any,
+    v1 = "v1.0" as any,
 
     /** 
      * @deprecated Don't use it, added for backward campability
@@ -39,10 +39,10 @@ export enum AssemblyApiAvailiableVersions {
     /** 
      * Stable version
      */
-    v2 = "v2" as any,
+    v2 = "v2.0" as any,
 
     /**
      * Frozen version
      */
-    v3 = "v3" as any,
+    v3 = "v3.0" as any,
 }
