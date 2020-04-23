@@ -1,7 +1,7 @@
 /*
 * MIT License
 
-* Copyright (c) 2019 GroupDocs Pty Ltd
+* Copyright (c) 2020 Aspose Pty Ltd
 
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -49,6 +49,37 @@ export class AssemblyApi {
      */
     constructor(appSID: string, appKey: string, baseUrl?: string, debugMode?: boolean, version?: AssemblyApiAvailiableVersions) {
         this.configuration = new Configuration(appSID, appKey, baseUrl, debugMode, version);
+    }
+
+    /**
+     * Builds a document using document template and XML or JSON data passed in request.
+     * @param requestObj contains request parameters
+     */
+    public async assembleDocument(requestObj: model.AssembleDocumentRequest): Promise<model.GroupDocsIncomingMessage<Buffer>> {
+        if (requestObj === null || requestObj === undefined) {
+            throw new Error('Required parameter "requestObj" was null or undefined when calling assembleDocument.');
+        }
+
+        const localVarPath = this.configuration.getApiBaseUrl() + "/assembly/assemble";
+        const queryParameters: any = {};
+
+        // verify required parameter 'requestObj.assembleOptions' is not undefined
+        if (requestObj.assembleOptions === undefined) {
+            throw new Error('Required parameter "requestObj.assembleOptions" was undefined when calling assembleDocument.');
+        }
+        
+        const requestOptions: request.Options = {
+            method: "POST",
+            qs: queryParameters,
+            uri: localVarPath,
+            encoding: null,
+            json: ObjectSerializer.serialize(requestObj.assembleOptions, requestObj.assembleOptions.constructor.name === "Object" ? "AssembleOptions" : requestObj.assembleOptions.constructor.name),
+        };
+
+        const response = await invokeApiMethod(requestOptions, this.configuration);
+        const body =  ObjectSerializer.deserialize(response.body, "Buffer");
+        const result: model.GroupDocsIncomingMessage<Buffer> = {body, response};
+        return Promise.resolve(result);
     }
 
     /**
@@ -322,7 +353,7 @@ export class AssemblyApi {
      * Retrieves list of supported file formats.
      * @param requestObj contains request parameters
      */
-    public async getSupportedFileFormats(requestObj: model.GetSupportedFileFormatsRequest): Promise<model.GroupDocsIncomingMessage<model.FormatCollection>> {
+    public async getSupportedFileFormats(requestObj: model.GetSupportedFileFormatsRequest): Promise<model.GroupDocsIncomingMessage<model.FileFormatsResponse>> {
         if (requestObj === null || requestObj === undefined) {
             throw new Error('Required parameter "requestObj" was null or undefined when calling getSupportedFileFormats.');
         }
@@ -338,8 +369,8 @@ export class AssemblyApi {
         };
 
         const response = await invokeApiMethod(requestOptions, this.configuration);
-        const body =  ObjectSerializer.deserialize(response.body, "FormatCollection");
-        const result: model.GroupDocsIncomingMessage<model.FormatCollection> = {body, response};
+        const body =  ObjectSerializer.deserialize(response.body, "FileFormatsResponse");
+        const result: model.GroupDocsIncomingMessage<model.FileFormatsResponse> = {body, response};
         return Promise.resolve(result);
     }
 
@@ -426,50 +457,6 @@ export class AssemblyApi {
 
         const response = await invokeApiMethod(requestOptions, this.configuration);
         return Promise.resolve(response);
-    }
-
-    /**
-     * Builds a document using document template and XML or JSON data passed in request
-     * @param requestObj contains request parameters
-     */
-    public async postAssembleDocument(requestObj: model.PostAssembleDocumentRequest): Promise<model.GroupDocsIncomingMessage<Buffer>> {
-        if (requestObj === null || requestObj === undefined) {
-            throw new Error('Required parameter "requestObj" was null or undefined when calling postAssembleDocument.');
-        }
-
-        let localVarPath = this.configuration.getApiBaseUrl() + "/assembly/{name}/build"
-            .replace("/{" + "name" + "}", (requestObj.name !== null) ? "/" + String(requestObj.name) : "");
-        const queryParameters: any = {};
-
-        // verify required parameter 'requestObj.name' is not undefined
-        if (requestObj.name === undefined) {
-            throw new Error('Required parameter "requestObj.name" was undefined when calling postAssembleDocument.');
-        }
-
-        // verify required parameter 'requestObj.name' is not null
-        if (requestObj.name === null) {
-            throw new Error('Required parameter "requestObj.name" was null when calling postAssembleDocument.');
-        }
-
-        // verify required parameter 'requestObj.reportData' is not undefined
-        if (requestObj.reportData === undefined) {
-            throw new Error('Required parameter "requestObj.reportData" was undefined when calling postAssembleDocument.');
-        }
-        
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "folder", requestObj.folder);
-        localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "destFileName", requestObj.destFileName);
-        const requestOptions: request.Options = {
-            method: "POST",
-            qs: queryParameters,
-            uri: localVarPath,
-            encoding: null,
-            json: ObjectSerializer.serialize(requestObj.reportData, requestObj.reportData.constructor.name === "Object" ? "ReportOptionsData" : requestObj.reportData.constructor.name),
-        };
-
-        const response = await invokeApiMethod(requestOptions, this.configuration);
-        const body =  ObjectSerializer.deserialize(response.body, "Buffer");
-        const result: model.GroupDocsIncomingMessage<Buffer> = {body, response};
-        return Promise.resolve(result);
     }
 
     /**

@@ -1,7 +1,7 @@
 /*
 * MIT License
 
-* Copyright (c) 2019 GroupDocs Pty Ltd
+* Copyright (c) 2020 Aspose Pty Ltd
 
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -57,6 +57,175 @@ export class AttributeInfo {
      * Gets or sets attribute type name
      */
     public type: string;
+}
+
+/**
+ * Error class.             
+ */
+export class ApiError {
+
+    /**
+     * Attribute type map
+     */
+    public static attributeTypeMap: Array<AttributeInfo> = [
+        {
+            name: "code",
+            baseName: "Code",
+            type: "string",
+        },        
+        {
+            name: "message",
+            baseName: "Message",
+            type: "string",
+        },        
+        {
+            name: "description",
+            baseName: "Description",
+            type: "string",
+        },        
+        {
+            name: "dateTime",
+            baseName: "DateTime",
+            type: "Date",
+        },        
+        {
+            name: "innerApiError",
+            baseName: "InnerApiError",
+            type: "ApiError",
+        }    ];
+
+    /**
+     * Returns attribute type map
+     */
+    public static getAttributeTypeMap() {
+        return ApiError.attributeTypeMap;
+    }
+
+    /**
+     * Gets or sets api error code.
+     */
+    public code: string;
+    
+    /**
+     * Gets or sets error message.
+     */
+    public message: string;
+    
+    /**
+     * Gets or sets error description.
+     */
+    public description: string;
+    
+    /**
+     * Gets or sets server datetime.
+     */
+    public dateTime: Date;
+    
+    /**
+     * Gets or sets inner error.
+     */
+    public innerApiError: ApiError;
+    
+    public constructor(init?: Partial<ApiError>) {
+        
+        Object.assign(this, init);
+    }        
+}
+
+/**
+ * Assemble options data which is using for specifying assemble options, like template name, save format, report data and etc.
+ */
+export class AssembleOptions {
+
+    /**
+     * Attribute type map
+     */
+    public static attributeTypeMap: Array<AttributeInfo> = [
+        {
+            name: "templateFileInfo",
+            baseName: "TemplateFileInfo",
+            type: "TemplateFileInfo",
+        },        
+        {
+            name: "saveFormat",
+            baseName: "SaveFormat",
+            type: "string",
+        },        
+        {
+            name: "reportData",
+            baseName: "ReportData",
+            type: "string",
+        },        
+        {
+            name: "outputPath",
+            baseName: "OutputPath",
+            type: "string",
+        }    ];
+
+    /**
+     * Returns attribute type map
+     */
+    public static getAttributeTypeMap() {
+        return AssembleOptions.attributeTypeMap;
+    }
+
+    /**
+     * Gets or sets the template name which is located on storage.
+     */
+    public templateFileInfo: TemplateFileInfo;
+    
+    /**
+     * Gets or sets a save format for assembled document.
+     */
+    public saveFormat: string;
+    
+    /**
+     * Gets or sets a data for report.
+     */
+    public reportData: string;
+    
+    /**
+     * Gets or sets result path of a built document.
+     */
+    public outputPath: string;
+    
+    public constructor(init?: Partial<AssembleOptions>) {
+        
+        Object.assign(this, init);
+    }        
+}
+
+/**
+ * Base class for all responses.
+ */
+export class AssemblyResponse {
+
+    /**
+     * Attribute type map
+     */
+    public static attributeTypeMap: Array<AttributeInfo> = [
+        {
+            name: "requestId",
+            baseName: "RequestId",
+            type: "string",
+        }    ];
+
+    /**
+     * Returns attribute type map
+     */
+    public static getAttributeTypeMap() {
+        return AssemblyResponse.attributeTypeMap;
+    }
+
+    /**
+     * Gets or sets request Id.
+     */
+    public requestId: string;
+    
+    public constructor(init?: Partial<AssemblyResponse>) {
+        
+        Object.assign(this, init);
+    }        
 }
 
 /**
@@ -230,12 +399,12 @@ export class Format {
     }
 
     /**
-     * File format.
+     * Gets or sets file format.
      */
     public fileFormat: string;
     
     /**
-     * File extension.
+     * Gets or sets file extension.
      */
     public extension: string;
     
@@ -268,54 +437,11 @@ export class FormatCollection {
     }
 
     /**
-     * Supported file formats.
+     * Gets or sets supported file formats.
      */
     public formats: Array<Format>;
     
     public constructor(init?: Partial<FormatCollection>) {
-        
-        Object.assign(this, init);
-    }        
-}
-
-/**
- * Save options data which is using for specifying additional save options, like save format and etc.
- */
-export class ReportOptionsData {
-
-    /**
-     * Attribute type map
-     */
-    public static attributeTypeMap: Array<AttributeInfo> = [
-        {
-            name: "saveFormat",
-            baseName: "SaveFormat",
-            type: "string",
-        },        
-        {
-            name: "reportData",
-            baseName: "ReportData",
-            type: "string",
-        }    ];
-
-    /**
-     * Returns attribute type map
-     */
-    public static getAttributeTypeMap() {
-        return ReportOptionsData.attributeTypeMap;
-    }
-
-    /**
-     * Save format for assembled document
-     */
-    public saveFormat: string;
-    
-    /**
-     * Data for report
-     */
-    public reportData: string;
-    
-    public constructor(init?: Partial<ReportOptionsData>) {
         
         Object.assign(this, init);
     }        
@@ -457,22 +583,190 @@ export class StorageFile {
     }        
 }
 
+/**
+ * TemplateFileInfo dto.             
+ */
+export class TemplateFileInfo {
+
+    /**
+     * Attribute type map
+     */
+    public static attributeTypeMap: Array<AttributeInfo> = [
+        {
+            name: "filePath",
+            baseName: "FilePath",
+            type: "string",
+        },        
+        {
+            name: "storageName",
+            baseName: "StorageName",
+            type: "string",
+        },        
+        {
+            name: "versionId",
+            baseName: "VersionId",
+            type: "string",
+        },        
+        {
+            name: "password",
+            baseName: "Password",
+            type: "string",
+        }    ];
+
+    /**
+     * Returns attribute type map
+     */
+    public static getAttributeTypeMap() {
+        return TemplateFileInfo.attributeTypeMap;
+    }
+
+    /**
+     * Gets or sets path to file.             
+     */
+    public filePath: string;
+    
+    /**
+     * Gets or sets the name of storage.             
+     */
+    public storageName: string;
+    
+    /**
+     * Gets or sets the name of storage.             
+     */
+    public versionId: string;
+    
+    /**
+     * Gets or sets the password.             
+     */
+    public password: string;
+    
+    public constructor(init?: Partial<TemplateFileInfo>) {
+        
+        Object.assign(this, init);
+    }        
+}
+
+/**
+ * Error response for exceptions.             
+ */
+export class AssemblyApiErrorResponse extends AssemblyResponse {
+
+    /**
+     * Attribute type map
+     */
+    public static attributeTypeMap: Array<AttributeInfo> = [
+        {
+            name: "error",
+            baseName: "Error",
+            type: "ApiError",
+        }    ];
+
+    /**
+     * Returns attribute type map
+     */
+    public static getAttributeTypeMap() {
+        return super.getAttributeTypeMap().concat(AssemblyApiErrorResponse.attributeTypeMap);
+    }
+
+    /**
+     * Gets or sets error.
+     */
+    public error: ApiError;
+    
+    public constructor(init?: Partial<AssemblyApiErrorResponse>) {
+        super(init);
+        Object.assign(this, init);
+    }        
+}
+
+/**
+ * Response with file formats.
+ */
+export class FileFormatsResponse extends AssemblyResponse {
+
+    /**
+     * Attribute type map
+     */
+    public static attributeTypeMap: Array<AttributeInfo> = [
+        {
+            name: "fileFormats",
+            baseName: "FileFormats",
+            type: "FormatCollection",
+        },        
+        {
+            name: "code",
+            baseName: "Code",
+            type: "number",
+        },        
+        {
+            name: "status",
+            baseName: "Status",
+            type: "string",
+        }    ];
+
+    /**
+     * Returns attribute type map
+     */
+    public static getAttributeTypeMap() {
+        return super.getAttributeTypeMap().concat(FileFormatsResponse.attributeTypeMap);
+    }
+
+    /**
+     * Gets or sets file formats.
+     */
+    public fileFormats: FormatCollection;
+    
+    /**
+     * Gets response status code.
+     */
+    public code: number;
+    
+    /**
+     * Gets or sets response status.
+     */
+    public status: string;
+    
+    public constructor(init?: Partial<FileFormatsResponse>) {
+        super(init);
+        Object.assign(this, init);
+    }        
+}
+
 const enumsMap = {
 };
 
 const typeMap = {
+            ApiError,
+            AssembleOptions,
+            AssemblyResponse,
             ErrorDetails,
             FileResponse,
             FilesList,
             FilesUploadResult,
             Format,
             FormatCollection,
-            ReportOptionsData,
             StorageApiError,
             StorageFile,
+            TemplateFileInfo,
+            AssemblyApiErrorResponse,
+            FileFormatsResponse,
 };
 
 export {enumsMap, typeMap};
+
+/**
+ * Request model for AssembleDocument operation.
+ */
+export class AssembleDocumentRequest {
+    /**
+     * Assemble Options. It should be JSON with TemplateName, SaveFormat, ReportData and etc.             
+     */
+    public assembleOptions: AssembleOptions;
+    
+    public constructor(init?: Partial<AssembleDocumentRequest>) {        
+        Object.assign(this, init);
+    } 
+}
 
 /**
  * Request model for CopyFile operation.
@@ -716,35 +1010,6 @@ export class MoveFolderRequest {
     public destStorageName: string;
     
     public constructor(init?: Partial<MoveFolderRequest>) {        
-        Object.assign(this, init);
-    } 
-}
-
-/**
- * Request model for PostAssembleDocument operation.
- */
-export class PostAssembleDocumentRequest {
-    /**
-     * File name of template, which is located on a storage
-     */
-    public name: string;
-
-    /**
-     * Report Data Options. It should be JSON with SaveFormat and ReportData
-     */
-    public reportData: ReportOptionsData;
-
-    /**
-     * Folder path where template file is located(on a storage)
-     */
-    public folder: string;
-
-    /**
-     * Result name of built document
-     */
-    public destFileName: string;
-    
-    public constructor(init?: Partial<PostAssembleDocumentRequest>) {        
         Object.assign(this, init);
     } 
 }
