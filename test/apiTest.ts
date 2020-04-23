@@ -50,7 +50,7 @@ describe("postAssemble function", () => {
                 reportData: readFileSync(localBaseTestDataFolder + dataName, "utf8"),
                 templateFileInfo: new TemplateFileInfo({
                     filePath: remoteBaseTestDataFolder + "GroupDocs.Assembly" + "/" + fileName,
-                }
+                }),
             });
             const request = new AssembleDocumentRequest({
                 assembleOptions: assembleOptions,
