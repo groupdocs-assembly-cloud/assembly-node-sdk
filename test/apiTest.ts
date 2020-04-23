@@ -45,7 +45,7 @@ describe("postAssemble function", () => {
                 resolve();
             });
         }).then(() => {
-            const assembleOptions = new AssembleOptions({ 
+            const assembleOptionsData = new AssembleOptions({ 
                 saveFormat: "pdf", 
                 reportData: readFileSync(localBaseTestDataFolder + dataName, "utf8"),
                 templateFileInfo: new TemplateFileInfo({
@@ -53,7 +53,7 @@ describe("postAssemble function", () => {
                 }),
             });
             const request = new AssembleDocumentRequest({
-                assembleOptions: { assembleOptions },
+                assembleOptions: assembleOptionsData,
             });
 
             return assemblyApi.assembleDocument(request).then((result) => {
