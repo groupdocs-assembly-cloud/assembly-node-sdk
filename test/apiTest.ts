@@ -21,7 +21,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-import { PostAssembleDocumentRequest, ReportOptionsData, UploadFileRequest } from "../src/model/model";
+import { AssembleDocumentRequest, AssembleOptions, TemplateFileInfo, UploadFileRequest } from "../src/model/model";
 import { initializeAssemblyApi, localBaseTestDataFolder, remoteBaseTestDataFolder } from "./baseTest";
 
 import { expect } from "chai";
@@ -45,17 +45,18 @@ describe("postAssemble function", () => {
                 resolve();
             });
         }).then(() => {
-            const reportOptionsData = new ReportOptionsData({ 
+            const assembleOptions = new AssembleOptions({ 
                 saveFormat: "pdf", 
                 reportData: readFileSync(localBaseTestDataFolder + dataName, "utf8"),
+                templateFileInfo: new TemplateFileInfo({
+                    filePath: remoteBaseTestDataFolder + "GroupDocs.Assembly" + "/" + fileName,
+                }
             });
-            const request = new PostAssembleDocumentRequest({
-                name: fileName,
-                folder: remoteBaseTestDataFolder + "GroupDocs.Assembly",
-                reportData: reportOptionsData,
+            const request = new AssembleDocumentRequest({
+                assembleOptions: assembleOptions,
             });
 
-            return assemblyApi.postAssembleDocument(request).then((result) => {
+            return assemblyApi.assembleDocument(request).then((result) => {
                 expect(result.response.statusCode).to.equal(200);
                 expect(result.body.byteLength).to.greaterThan(0);
             });
