@@ -1,6 +1,6 @@
 {
-  "name": "assembly-cloud",
-  "version": "18.9.0",
+  "name": "groupdocs-assembly-cloud",
+  "version": "20.6.0",
   "description": "GroupDocs.Assembly Cloud SDK for Node.js",
   "homepage": "https://products.groupdocs.cloud",
   "author": {
