@@ -23,14 +23,13 @@
 */
 
 import { AssemblyApi } from "../src/api";
-import { AssemblyApiAvailiableVersions } from "../src/internal/assemblyApiAvailiableVersions";
 
 /**
  * Initialize AssemblyApi
  */
-export function initializeAssemblyApi(debugMode?: boolean, version?: AssemblyApiAvailiableVersions) {
+export function initializeAssemblyApi(debugMode?: boolean) {
     const config = require("../testConfig.json");
-    const assemblyApi = new AssemblyApi(config.AppSid, config.AppKey, config.BaseUrl, debugMode, version);
+    const assemblyApi = new AssemblyApi(config.AppSid, config.AppKey, config.BaseUrl, debugMode);
     return assemblyApi;
 }
 
