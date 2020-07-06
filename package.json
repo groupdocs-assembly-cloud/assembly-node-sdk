@@ -29,9 +29,11 @@
     "gulp": "gulp"
   },
   "dependencies": {
-    "@types/request": "^2.47.0",
-    "request": "^2.87.0",
-    "request-debug": "^0.2.0"
+    "@types/request": "^2.48.4",
+    "blob": "^0.1.0",
+    "request": "^2.88.2",
+    "request-debug": "^0.2.0",
+    "uuid": "^7.0.3"
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",
