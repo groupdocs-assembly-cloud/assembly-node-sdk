@@ -59,6 +59,7 @@ describe("postAssemble function", () => {
             return assemblyApi.assembleDocument(request).then((result) => {
                 expect(result.response.statusCode).to.equal(200);
                 expect(result.body.byteLength).to.greaterThan(0);
+				resolve();
             });
         });
     });
