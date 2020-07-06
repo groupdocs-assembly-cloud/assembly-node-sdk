@@ -57,12 +57,12 @@ describe("postAssemble function", () => {
             });
 
             return assemblyApi.assembleDocument(request)
+			.catch((error) => {
+                expect(error.response.statusCode).to.equal(404);
+            })
 			.then((result) => {
                 expect(result.response.statusCode).to.equal(200);
                 expect(result.body.byteLength).to.greaterThan(0);
-            })
-			.catch((error) => {
-                expect(error.response.statusCode).to.equal(404);
             });
         });
     });
