@@ -30,6 +30,7 @@ node('words-linux') {
 						sh "npm install"
 						sh "npm run gulp buildRelease"
 						packageName = sh(returnStdout: true, script: 'npm pack').trim()
+						sh "echo ${packageName}"
 						
 						stash name: "newPackage", includes: "${packageName}" 
 					}			
@@ -37,12 +38,12 @@ node('words-linux') {
 				
 				gitlabCommitStatus("replace references") {
 					stage('replace references'){
-						sh "sed -i 's/assemblycloud/groupdocsassemblycloudtest/g' package.json" //TODO: Change to proper value
+						sh "sed -i 's/groupdocs-assembly-cloud/groupdocs-assembly-cloud-test/g' package.json" //TODO: Change to proper value
 					
-						sh "npm uninstall groupdocsassemblycloud"
+						sh "npm uninstall groupdocs-assembly-cloud"
 						sh "npm install ${packageName}"
 						
-						sh "find test -type f -name \"*.ts\" -exec sed -i 's+\".*/src/.*\"+\"groupdocsassemblycloud\"+g' {} +"
+						sh "find test -type f -name \"*.ts\" -exec sed -i 's+\".*/src/.*\"+\"groupdocs-assembly-cloud\"+g' {} +"
 					}
 				}
 				
