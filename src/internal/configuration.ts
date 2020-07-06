@@ -60,7 +60,7 @@ export class Configuration {
      */
     public version: AssemblyApiAvailiableVersions = AssemblyApiAvailiableVersions.v1;
 
-    constructor(appSID: string, appKey: string, baseUrl?: string, debugMode?: boolean, version?: AssemblyApiAvailiableVersions) {
+    constructor(appSID: string, appKey: string, baseUrl?: string, debugMode?: boolean) {
         if (baseUrl) {
             this.baseUrl = baseUrl;
         }
@@ -68,10 +68,6 @@ export class Configuration {
         this.appSID = appSID;
         this.appKey = appKey;
         this.debugMode = debugMode;
-
-        if (version) {
-            this.version = version;
-        }
 
         this.authentication = new OAuth() as IAuthentication;
     }
