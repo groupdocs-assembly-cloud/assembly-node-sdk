@@ -16,7 +16,7 @@ node('words-linux') {
 				}
 				
 				withCredentials([usernamePassword(credentialsId: '6179b564-811f-48a9-8b85-875076fadbf5', passwordVariable: 'AppKey', usernameVariable: 'AppSid')]) {
-					sh 'echo "{\\"AppSid\\": \\"$AppSid\\",\\"AppKey\\": \\"$AppKey\\"}" > testConfig.json'
+					sh 'echo "{\\"AppSid\\": \\"$AppSid\\",\\"AppKey\\": \\"$AppKey\\", \\"BaseUrl\\": \\"https://api-qa.groupdocs.cloud\\}" > testConfig.json'
 				}
 		   }
 		}
@@ -38,7 +38,7 @@ node('words-linux') {
 				
 				gitlabCommitStatus("replace references") {
 					stage('replace references'){
-						sh "sed -i 's/groupdocs-assembly-cloud/groupdocs-assembly-cloud-test/g' package.json" //TODO: Change to proper value
+						sh "sed -i 's/groupdocs-assembly-cloud/groupdocs-assembly-cloud-test/g' package.json"
 					
 						sh "npm uninstall groupdocs-assembly-cloud"
 						sh "npm install ${packageName}"
