@@ -30,7 +30,7 @@ import "mocha";
 
 describe("postAssemble function", () => {
     it("should return non empty document stream", () => {
-        const assemblyApi = initializeAssemblyApi(true);
+        const assemblyApi = initializeAssemblyApi();
 
         const fileName = "TestAllChartTypes.docx";
         const dataName = "Teams.json";
