@@ -46,7 +46,7 @@
     "gulp-cucumber": "0.0.24",
     "gulp-typescript": "^5.0.1",
     "gulp-util": "^3.0.8",
-    "mocha": "^7.1.1",
+    "mocha": "^7.2.0",
     "mocha-cases": "^0.3.0",
     "mocha-jenkins-reporter": "^0.4.3",
     "mocha-sinon": "^2.1.2",
