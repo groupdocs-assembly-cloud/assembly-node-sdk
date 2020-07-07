@@ -23,15 +23,17 @@
   "main": "dist/api.js",
   "types": "dist/api.d.ts",
   "scripts": {
-    "test": "mocha -r ts-node/register test/**/*.ts --timeout 35000 --reporter mocha-jenkins-reporter",
-    "test-jenkins": "cross-env JUNIT_REPORT_PATH=reports/test_report.xml mocha -r ts-node/register test/**/*.ts --timeout 35000 --reporter mocha-jenkins-reporter",
+    "test": "mocha -r ts-node/register test/**/*.ts --timeout 40000 --reporter mocha-jenkins-reporter",
+    "test-jenkins": "cross-env JUNIT_REPORT_PATH=reports/test_report.xml mocha -r ts-node/register test/**/*.ts --timeout 40000 --reporter mocha-jenkins-reporter",
     "lint": "tslint src/{,**/}*.ts test/{,**/}*.ts -t verbose --project ./tsconfig.json",
     "gulp": "gulp"
   },
   "dependencies": {
-    "@types/request": "^2.47.0",
-    "request": "^2.87.0",
-    "request-debug": "^0.2.0"
+    "@types/request": "^2.48.4",
+    "blob": "^0.1.0",
+    "request": "^2.88.2",
+    "request-debug": "^0.2.0",
+    "uuid": "^7.0.3"
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",
@@ -44,7 +46,7 @@
     "gulp-cucumber": "0.0.24",
     "gulp-typescript": "^5.0.1",
     "gulp-util": "^3.0.8",
-    "mocha": "^7.1.1",
+    "mocha": "^7.2.0",
     "mocha-cases": "^0.3.0",
     "mocha-jenkins-reporter": "^0.4.3",
     "mocha-sinon": "^2.1.2",

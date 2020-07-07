@@ -30,7 +30,7 @@ import "mocha";
 
 describe("postAssemble function", () => {
     it("should return non empty document stream", () => {
-        const assemblyApi = initializeAssemblyApi();
+        const assemblyApi = initializeAssemblyApi(true);
 
         const fileName = "TestAllChartTypes.docx";
         const dataName = "Teams.json";
@@ -56,7 +56,8 @@ describe("postAssemble function", () => {
                 assembleOptions: assembleOptionsData,
             });
 
-            return assemblyApi.assembleDocument(request).then((result) => {
+            return assemblyApi.assembleDocument(request)
+			.then((result) => {
                 expect(result.response.statusCode).to.equal(200);
                 expect(result.body.byteLength).to.greaterThan(0);
             });

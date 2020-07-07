@@ -86,8 +86,8 @@ async function invokeApiMethodInternal(requestOptions: request.Options, confgura
         requestOptions.headers = {};
     }
 
-    requestOptions.headers["x-aspose-client"] = "nodejs sdk";
-    requestOptions.headers["x-aspose-client-version"] = "19.9";
+    requestOptions.headers["x-groupdocs-client"] = "nodejs sdk";
+    requestOptions.headers["x-groupdocs-client-version"] = "20.6";
 
     const auth = confguration.authentication;
     if (!notApplyAuthToRequest) {
