@@ -18,6 +18,7 @@ node('words-linux') {
 				withCredentials([usernamePassword(credentialsId: '6179b564-811f-48a9-8b85-875076fadbf5', passwordVariable: 'AppKey', usernameVariable: 'AppSid')]) {
 					sh 'echo "{\\"AppSid\\": \\"$AppSid\\",\\"AppKey\\": \\"$AppKey\\", \\"BaseUrl\\": \\"https://api-qa.groupdocs.cloud\\"}" > testConfig.json'
 				}
+				sh 'cat testConfig.json'
 		   }
 		}
        
