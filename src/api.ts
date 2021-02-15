@@ -1,7 +1,7 @@
 /*
 * MIT License
 
-* Copyright (c) 2020 Aspose Pty Ltd
+* Copyright (c) 2021 Aspose Pty Ltd
 
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +24,7 @@
 import http = require("http");
 import request = require("request");
 
+import { AssemblyApiAvailiableVersions } from "../src/internal/assemblyApiAvailiableVersions";
 import { Configuration } from "./internal/configuration";
 import { ObjectSerializer } from "./internal/objectSerializer";
 import { addQueryParameterToUrl, invokeApiMethod } from "./internal/requestHelper";
@@ -46,8 +47,8 @@ export class AssemblyApi {
      * @param baseUrl Base api Url.
      * @param debugMode A value indicating whether debug mode. In debug mode all requests and responses are logged to console.
      */
-    constructor(appSID: string, appKey: string, baseUrl?: string, debugMode?: boolean) {
-        this.configuration = new Configuration(appSID, appKey, baseUrl, debugMode);
+    constructor(appSID: string, appKey: string, baseUrl?: string, debugMode?: boolean, version?: AssemblyApiAvailiableVersions) {
+        this.configuration = new Configuration(appSID, appKey, baseUrl, debugMode, version);
     }
 
     /**
@@ -472,14 +473,14 @@ export class AssemblyApi {
         const queryParameters: any = {};
         const formParams: any = {};
 
-        // verify required parameter 'requestObj.file' is not undefined
-        if (requestObj.file === undefined) {
-            throw new Error('Required parameter "requestObj.file" was undefined when calling uploadFile.');
+        // verify required parameter 'requestObj.fileContent' is not undefined
+        if (requestObj.fileContent === undefined) {
+            throw new Error('Required parameter "requestObj.fileContent" was undefined when calling uploadFile.');
         }
 
-        // verify required parameter 'requestObj.file' is not null
-        if (requestObj.file === null) {
-            throw new Error('Required parameter "requestObj.file" was null when calling uploadFile.');
+        // verify required parameter 'requestObj.fileContent' is not null
+        if (requestObj.fileContent === null) {
+            throw new Error('Required parameter "requestObj.fileContent" was null when calling uploadFile.');
         }
 
         // verify required parameter 'requestObj.path' is not undefined
@@ -493,8 +494,8 @@ export class AssemblyApi {
         }
         
         localVarPath = addQueryParameterToUrl(localVarPath, queryParameters, "storageName", requestObj.storageName);
-        if (requestObj.file !== undefined) {
-            formParams.File = requestObj.file;
+        if (requestObj.fileContent !== undefined) {
+            formParams.FileContent = requestObj.fileContent;
         }
 
         const requestOptions: request.Options = {
