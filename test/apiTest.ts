@@ -36,7 +36,7 @@ describe("postAssemble function", () => {
         const dataName = "Teams.json";
         return new Promise((resolve) => {
             const request = new UploadFileRequest({
-                file: createReadStream(localBaseTestDataFolder + "/" + fileName),
+                fileContent: createReadStream(localBaseTestDataFolder + "/" + fileName),
                 path: remoteBaseTestDataFolder + "GroupDocs.Assembly" + "/" + fileName,
             });
             

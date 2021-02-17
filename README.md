@@ -27,21 +27,21 @@ const { AssemblyApi, PostAssembleDocumentRequest } = require("groupdocs-assembly
 const assemblyApi = new AssemblyApi(AppSid, AppKey);
 
 const assembleOptionsData = new AssembleOptions({ 
-                saveFormat: "pdf", 
-                reportData: readFileSync(pathToFile, "utf8"),
-                templateFileInfo: new TemplateFileInfo({
-                    filePath: pathToRemoteFile,
-                }),
-            });
-            const request = new AssembleDocumentRequest({
-                assembleOptions: assembleOptionsData,
-            });
+        saveFormat: "pdf", 
+        reportData: readFileSync(pathToFile, "utf8"),
+        templateFileInfo: new TemplateFileInfo({
+            filePath: pathToRemoteFile,
+        }),
+    });
+const request = new AssembleDocumentRequest({
+    assembleOptions: assembleOptionsData,
+});
 
-            return assemblyApi.assembleDocument(request)
-			.then((result) => {
-                expect(result.response.statusCode).to.equal(200);
-                expect(result.body.byteLength).to.greaterThan(0);
-            });
+return assemblyApi.assembleDocument(request)
+.then((result) => {
+        expect(result.response.statusCode).to.equal(200);
+        expect(result.body.byteLength).to.greaterThan(0);
+});
 
 
 ```
