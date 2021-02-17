@@ -24,7 +24,6 @@
 import http = require("http");
 import request = require("request");
 
-import { AssemblyApiAvailiableVersions } from "../src/internal/assemblyApiAvailiableVersions";
 import { Configuration } from "./internal/configuration";
 import { ObjectSerializer } from "./internal/objectSerializer";
 import { addQueryParameterToUrl, invokeApiMethod } from "./internal/requestHelper";
