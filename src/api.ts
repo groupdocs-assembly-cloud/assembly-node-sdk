@@ -47,8 +47,8 @@ export class AssemblyApi {
      * @param baseUrl Base api Url.
      * @param debugMode A value indicating whether debug mode. In debug mode all requests and responses are logged to console.
      */
-    constructor(appSID: string, appKey: string, baseUrl?: string, debugMode?: boolean, version?: AssemblyApiAvailiableVersions) {
-        this.configuration = new Configuration(appSID, appKey, baseUrl, debugMode, version);
+    constructor(appSID: string, appKey: string, baseUrl?: string, debugMode?: boolean) {
+        this.configuration = new Configuration(appSID, appKey, baseUrl, debugMode);
     }
 
     /**
