@@ -23,7 +23,6 @@
 */
 
 import { IAuthentication, OAuth  } from "../internal/auth";
-import { AssemblyApiAvailiableVersions } from "./assemblyApiAvailiableVersions";
 const defaultBasePath = "https://api.groupdocs.cloud";
 
 /**
@@ -55,10 +54,6 @@ export class Configuration {
      */
     public debugMode: boolean;
 
-    /**
-     * Gets or sets the API version.
-     */
-    public version: AssemblyApiAvailiableVersions = AssemblyApiAvailiableVersions.v1;
 
     constructor(appSID: string, appKey: string, baseUrl?: string, debugMode?: boolean) {
         if (baseUrl) {
@@ -76,6 +71,6 @@ export class Configuration {
      * Returns api base url
      */
     public getApiBaseUrl(): string {
-        return this.baseUrl + "/" + this.version;
+        return this.baseUrl + "/v1.0";
     }
 }
