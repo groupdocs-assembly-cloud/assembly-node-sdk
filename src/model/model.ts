@@ -1,7 +1,7 @@
 /*
 * MIT License
 
-* Copyright (c) 2020 Aspose Pty Ltd
+* Copyright (c) 2021 Aspose Pty Ltd
 
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -89,8 +89,8 @@ export class ApiError {
             type: "Date",
         },        
         {
-            name: "innerApiError",
-            baseName: "InnerApiError",
+            name: "innerError",
+            baseName: "InnerError",
             type: "ApiError",
         }    ];
 
@@ -124,7 +124,7 @@ export class ApiError {
     /**
      * Gets or sets inner error.
      */
-    public innerApiError: ApiError;
+    public innerError: ApiError;
     
     public constructor(init?: Partial<ApiError>) {
         
@@ -243,8 +243,8 @@ export class ErrorDetails {
             type: "string",
         },        
         {
-            name: "date",
-            baseName: "Date",
+            name: "errorDateTime",
+            baseName: "ErrorDateTime",
             type: "Date",
         }    ];
 
@@ -256,14 +256,14 @@ export class ErrorDetails {
     }
 
     /**
-     * The request id
+     * The request id.
      */
     public requestId: string;
     
     /**
-     * Date
+     * Error datetime.
      */
-    public date: Date;
+    public errorDateTime: Date;
     
     public constructor(init?: Partial<ErrorDetails>) {
         
@@ -759,7 +759,7 @@ export {enumsMap, typeMap};
  */
 export class AssembleDocumentRequest {
     /**
-     * Assemble Options. It should be JSON with TemplateName, SaveFormat, ReportData and etc.             
+     * Assemble Options. It should be JSON or XML with TemplateFileInfo, SaveFormat, ReportData and etc.             
      */
     public assembleOptions: AssembleOptions;
     
@@ -1021,7 +1021,7 @@ export class UploadFileRequest {
     /**
      * File to upload
      */
-    public file: Readable;
+    public fileContent: Readable;
 
     /**
      * Path where to upload including filename and extension e.g. /file.ext or /Folder 1/file.ext              If the content is multipart and path does not contains the file name it tries to get them from filename parameter              from Content-Disposition header.
